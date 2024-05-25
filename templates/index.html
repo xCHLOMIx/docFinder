@@ -1,0 +1,51 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+<style>
+    * {
+        font-family: Poppins;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #D9D9D9;
+    }
+    h1 {
+        font-size: 100px;
+    }
+    p {
+        font-size: 30px;
+    }
+    button {
+        cursor: pointer;
+        background: #4f6dcf;
+        padding: 12px 25px;
+        color: #D9D9D9;
+        border-radius: 10px;
+        border: none;
+        transition: .3s;
+    }
+    button:hover {
+        background-color: #344886;
+    }
+</style>
+<title>docFinder</title>
+</head>
+<body>
+    <h1>docFinder💀</h1>
+    <p>See your next...</p><br>
+    <div class="links">
+        <a href="{% url "patient" %}"><button id="doc">Doctor appointment</button></a>
+        <a href="{% url "doctor" %}"><button id="pat">Patient appointment</button></a>
+    </div>
+</body>
+{% endblock content %}

@@ -1,0 +1,258 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>docFinder - Doctor</title>
+    <style>
+        * {
+    font-family: Poppins;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #282828;
+    margin: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: max-content;
+    min-width: 130px;
+    color: white;
+}
+
+.logo img {
+    width: 33px;
+}
+
+.account {
+    background-color: #D9D9D9;
+    width: 150px;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5px 5px 15px;
+    border-radius: 10px;
+}
+
+.account img {
+    background-color: #282828;
+    width: 30px;
+    border-radius: 7px;
+    padding: 3px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 10px;
+}
+
+.greeting span {
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.greeting {
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 0 40px 0;
+}
+
+.greetings {
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 0;
+}
+
+.greetings span {
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.content {
+    color: white;
+    width: 95%;
+    max-width: 1020px;
+    margin: auto;
+    padding: 40px;
+    background-color: #364781;
+    border-radius: 15px;
+    position: relative;
+}
+
+.content h1 {
+    font-size: 50px;
+}
+
+.content h3 {
+    font-size: 30px;
+}
+
+.content p {
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.content img {
+    position: absolute;
+    width: 400px;
+    bottom: 0;
+    right: 0;
+}
+
+.appointments {
+    color: #282828;
+    width: 95%;
+    max-width: 1060px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #D9D9D9;
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.appointment {
+    cursor: pointer;
+    color: white;
+    background-color: #282828;
+    width: 480px;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    transition: .3s;
+}
+
+.appointment::after {
+    content: '';
+    width: 400px;
+}
+.cont {
+    margin-top: 20px;
+    background-color: burlywood;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 30px;
+    max-width: 1020px;
+}
+
+button img {
+    width: 20px;
+    height: 20px;
+}
+
+button#decline img {
+    width: 17px;
+    height: 17px;
+}
+
+.btns {
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+button {
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 7px;
+}
+
+button#decline {
+    padding: 13px 13px;
+    background-color: #FC4100;
+}
+
+button#accept {
+    background-color: #8DECB4;
+}
+
+textarea {
+    width: 100%;
+}
+.text b#link {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.appointment:hover {
+    box-shadow: -4px 4px 3px gray;
+    transform: translate(3px, -3px);
+}
+a {
+    text-decoration: none;
+    color: #282828;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static "img/logo.png" %}" alt="">
+            <span>docFinder</span>
+        </div>
+        <a href="{% url "signout" %}">
+            <div class="account">
+                <span>Dr. {{ request.user.first_name }}</span>
+                <img src="{% static "img/doctor.png" %}" alt="">
+            </div>
+        </a>
+    </nav>
+    <div class="greeting">
+        <span>Greetings, {{ request.user.first_name }}</span>
+    </div>
+    <div class="content">
+        <h3>See your next patient in</h3>
+        <h1>APPOINTMENTS</h1>
+        <p>Navigate to appointments to view your next appointment</p>
+        <img src="{% static "img/doc.png" %}" alt="">
+    </div>
+    <div class="greetings">
+        <span>APPOINTMENTS</span>
+    </div>
+    <div class="appointments">
+        {% for appointment in appointments %}
+            <div class="appointment">
+                <div class="text">
+                    <p><b>Patient name:</b> {{ appointment.patient }}</p>
+                    <p><b>Appointment date:</b> {{ appointment.date }}</p>
+                    <p><b>Description:</b> {{ appointment.description }}</p><br>
+                    <p><b>Status:</b> {{ appointment.status }} </p><br><br>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+
+{% endblock content %}

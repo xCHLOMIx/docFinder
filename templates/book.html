@@ -1,0 +1,220 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+
+<title>docFinder - Book appointment</title>
+    <style>
+        * {
+    font-family: Poppins;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #282828;
+    margin: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: max-content;
+    min-width: 130px;
+    color: white;
+}
+
+.logo img {
+    width: 33px;
+}
+
+.account {
+    background-color: #D9D9D9;
+    width: 150px;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5px 5px 15px;
+    border-radius: 10px;
+}
+
+.account img {
+    background-color: #282828;
+    width: 25px;
+    border-radius: 7px;
+    padding: 7px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 10px;
+}
+
+.greeting span {
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.greeting {
+    width: 95%;
+    max-width: 1070px;
+    margin: auto;
+    padding: 40px 0 40px 0;
+}
+
+.greetings {
+    width: 95%;
+    max-width: 1070px;
+    margin: auto;
+    padding: 30px 0;
+}
+
+.greetings span {
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.content {
+    color: white;
+    width: 95%;
+    max-width: 1020px;
+    margin: auto;
+    padding: 25px;
+    background-color: #4f6dcf;
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+}
+
+.content h1 {
+    font-size: 50px;
+}
+
+.content h3 {
+    font-size: 30px;
+}
+
+.content p {
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.content img {
+    position: absolute;
+    width: 250px;
+    bottom: 0;
+    right: 0;
+}
+
+
+.btns {
+    display: flex;
+    gap: 15px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 13px 40px;
+    border-radius: 10px;
+    background-color: #282828;
+    color: white;
+    transition: .3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 13px;
+    outline: none;
+}
+
+form {
+    width: 80%;
+    padding: 15px;
+    border-radius: 13px;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.text b#link {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+label {
+    display: none;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 5px;
+    outline: none;
+    margin-left: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+a {
+    color: black;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="{% static 'img/logo.png' %}" alt="">
+            <span>docFinder</span>
+        </div>
+        <a href="logout/">
+            <div class="account">
+                <span>{{ request.user.id }}</span>
+                <img src="{% static 'img/user.png' %}" alt="">
+            </div>
+        </a>
+    </nav>
+    <div class="greeting">
+        <span>Greetings, Chlomi</span>
+    </div>
+    <div class="content">
+        <h3>Book an appointment with Dr. {{ doctor.user.first_name }}</h3>
+        <img src="doc.png" alt="">
+    </div>
+    <div class="greetings">
+        <span>Fill out this form</span>
+    </div>
+    <div class="content">
+        <form action="" method='POST'>
+            {% csrf_token %}
+            {{ forms }}
+            <button>Book</button>
+        </form>
+    </div>
+</body>
+
+{% endblock content %}
+
+
